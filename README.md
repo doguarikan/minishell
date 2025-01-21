@@ -1,6 +1,6 @@
 # Minishell - A Bash Replica in C
 
-Welcome to **Minishell**, a minimalist yet powerful replica of the Unix Bash shell, entirely written in C. This project aims to simulate the core functionalities of a Unix-like command-line interface, providing a deeper understanding of shell behavior, process management, and system calls.
+Welcome to **Minishell**, a minimalist yet powerful replica of the Unix Bash shell, entirely written in C. This project aims to simulate the core functionalities of a Unix-like command-line interface, providing a deeper understanding of shell behavior, process management, and system calls
 
 ## Features
 
