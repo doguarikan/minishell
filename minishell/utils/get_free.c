@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngulcift <ngulcift@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:05:24 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/20 12:05:26 by ngulcift         ###   ########.fr       */
+/*   Created: 2024/09/24 19:46:19 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:46:21 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ void	free_fd_list(t_fd *head)
 		temp = head;
 		head = head->next;
 		free(temp->name);
+		free(temp);
+	}
+}
+
+void	free_ty_list(t_ty *head)
+{
+	t_ty	*temp;
+
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
 		free(temp);
 	}
 }

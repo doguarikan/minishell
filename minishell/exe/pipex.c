@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngulcift <ngulcift@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:07:06 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/24 20:29:26 by ngulcift         ###   ########.fr       */
+/*   Created: 2024/09/24 19:37:40 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 20:44:54 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	run_exec(t_line *command, char **env, t_exit_status *exit_code_line)
 		ft_putendl_fd(": There is no such command", 2);
 		exit(127);
 	}
-	execve(path, get_copy(command->cmd, command->arg), env);
+	execve(path, get_copy(ft_strdup(command->cmd), command->arg), env);
 	exit_code_line->exit_code = 1;
 	exit(exit_code_line->exit_code);
 }
@@ -59,9 +59,9 @@ char	*get_path(char **env)
 	path = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], "PATH=", 5))
+		if (ft_strnstr(env[i], "PATH", 5))
 		{
-			path = ft_strdup(&env[i][5]);
+			path = ft_strdup(env[i]);
 			break ;
 		}
 		i++;
@@ -90,7 +90,7 @@ char	*get_command_path(char **env, char *command)
 			path = ft_strdup(command);
 		address = ft_strjoin(paths[i], command);
 		if (access(address, F_OK | X_OK) == 0)
-			path = ft_strdup(address);
+			path = address;
 		i++;
 	}
 	free(command);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngulcift <ngulcift@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:06:54 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/21 14:42:51 by ngulcift         ###   ########.fr       */
+/*   Created: 2024/09/24 19:37:28 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:37:29 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	handle_input(int pipefd[2], char *target)
+int	handle_input(int pipefd[2], char *target)
 {
 	char	*input;
 
@@ -37,6 +37,7 @@ void	handle_input(int pipefd[2], char *target)
 			exit(EXIT_FAILURE);
 		free(input);
 	}
+	return (pipefd[0]);
 }
 
 int	heredoc(char *target)
@@ -46,8 +47,5 @@ int	heredoc(char *target)
 	init_signals_heredoc();
 	if (pipe(pipefd) == -1)
 		exit(EXIT_FAILURE);
-	handle_input(pipefd, target);
-	close(pipefd[1]);
-	return (pipefd[0]);
+	return (handle_input(pipefd, target));
 }
-

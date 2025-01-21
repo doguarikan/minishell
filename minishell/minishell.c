@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhademi <muhademi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:05:53 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/24 19:31:21 by muhademi         ###   ########.fr       */
+/*   Created: 2024/09/24 19:46:44 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:53:16 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	start_shell(t_mini *mini, t_exit_status *exit)
 			free(mini->line);
 			continue ;
 		}
+		if (mini->line[0] == 0)
+			continue ;
 		add_history(mini->line);
 		procedure(mini, exit);
 	}

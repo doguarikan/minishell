@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   echo_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 19:43:40 by darikan           #+#    #+#             */
-/*   Updated: 2024/09/24 19:43:41 by darikan          ###   ########.fr       */
+/*   Created: 2024/09/24 19:36:48 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:36:49 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	echo_main(char *s)
 {
-	unsigned int	i;
+	int	ind;
 
-	i = 0;
-	while (s[i] != '\0')
+	if (!s)
 	{
-		f(i, s + i);
-		i++;
+		printf("\n");
+		return (0);
 	}
+	ind = echo_index(s);
+	printf("%s", &s[ind]);
+	if (ind < 3)
+		printf("\n");
+	return (0);
 }

@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   struct_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngulcift <ngulcift@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:05:38 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/20 12:05:39 by ngulcift         ###   ########.fr       */
+/*   Created: 2024/09/24 19:46:30 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:46:32 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	append_ty(t_ty **head, t_ty *new_ty)
+{
+	t_ty	*current;
+
+	if (*head == NULL)
+		*head = new_ty;
+	else
+	{
+		current = *head;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new_ty;
+	}
+}
 
 int	add_arg(char ***arg, char *new_arg)
 {

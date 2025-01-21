@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhademi <muhademi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:05:58 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/24 19:26:01 by muhademi         ###   ########.fr       */
+/*   Created: 2024/09/24 19:47:00 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:54:50 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef enum s_file_des
 	STDOUT = 1,
 	STDERR = 2
 }			t_file_des;
+
+typedef struct s_ty
+{
+	int			type;
+	struct s_ty	*next;
+}				t_ty;
 
 typedef struct s_arg
 {
@@ -112,7 +118,6 @@ void			procedure(t_mini *mini, t_exit_status *exit_t);
 void			update_dirs(char ***env, char *current_dir);
 int				handle_path(char **path, char ***env);
 char			*get_home_path(char ***env);
-void			control_space(char *command);
 int				change_directory(char *path);
 int				ft_cd(t_line *line);
 int				is_valid(const char *str);
@@ -141,7 +146,7 @@ void			exit_handling(char **args, int i, \
 void			ft_exit(t_line *line, t_exit_status *exit_code_line);
 char			**get_copy(char *result, char **arr);
 char			*merge_echo(char **arr);
-void			handle_input(int pipefd[2], char *target);
+int				handle_input(int pipefd[2], char *target);
 int				heredoc(char *target);
 void			free_pipe_things(t_pipe_info *pipe_info, \
 				t_exit_status *exit_code_line);
@@ -191,26 +196,16 @@ void			quote_check_meta(char *str, int *i);
 void			shift_and_insert(char *str, int *len, int pos);
 int				count_meta_character(char *str, char s);
 void			insert_space(t_mini *mini, char s);
-int				count_substr(const char *str, const char *sub);
-char			*allocate_new_node(const char *node, \
-				const char *var, const char *value);
-void			switch_substr_in_node(char *new_node, \
-				const char *node, const char *var, const char *value);
-void			switch_node_substr(t_split *node, \
-				const char *var, const char *value);
-void			dollar_and_quest(t_split *split, t_exit_status *exit);
 char			*get_res(char *var, t_mini **mini);
 int				get_dollar(char *str, int i, \
 				t_mini **mini, char **new_str);
 int				get_var_end(char *str, int i);
 char			*extract_var(char *str, int i, int j);
 int				get_single_quote(char *str, int i, char **new_str);
-int				get_double_quote(char *str, int i, \
-				char **new_str, t_mini **mini);
 char			*remove_quotes_two(t_split **split, t_mini **mini, \
 				t_exit_status *exit_t);
 int				update_index(char *str, char **new_str, \
-				int nums[2], t_mini **mini);
+				int i, t_mini **mini);
 void			expander(t_split *split, t_mini *mini, t_exit_status *exit_t);
 void			remove_quotes(t_split *split);
 void			quotes(t_split *split);
@@ -267,11 +262,14 @@ void			free_the_split(t_split *split);
 void			free_the_minis(t_mini *mini);
 void			free_command(t_line *head);
 void			free_fd_list(t_fd *head);
+void			free_ty_list(t_ty *head);
 void			free_arg_list(char **arg);
 t_line			*create_new_line(char ***env);
 t_fd			*create_new_fd(char *name, int type);
+t_ty			*create_new_ty(int type);
 void			append_line(t_line **head, t_line *new_line);
 void			append_fd(t_fd **head, t_fd *new_fd);
+void			append_ty(t_ty **head, t_ty *new_ty);
 int				add_arg(char ***arg, char *new_arg);
 int				struct_len(t_line *head);
 int				fd_len(t_fd **head);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngulcift <ngulcift@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darikan <darikan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 12:05:33 by ngulcift          #+#    #+#             */
-/*   Updated: 2024/09/20 12:05:35 by ngulcift         ###   ########.fr       */
+/*   Created: 2024/09/24 19:46:23 by darikan           #+#    #+#             */
+/*   Updated: 2024/09/24 19:46:25 by darikan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ t_fd	*create_new_fd(char *name, int type)
 	return (new_fd);
 }
 
+t_ty	*create_new_ty(int type)
+{
+	t_ty	*new_ty;
+
+	new_ty = (t_ty *)malloc(sizeof(t_ty));
+	if (new_ty == NULL)
+		return (0);
+	new_ty->type = type;
+	new_ty->next = NULL;
+	return (new_ty);
+}
 
 void	append_line(t_line **head, t_line *new_line)
 {
